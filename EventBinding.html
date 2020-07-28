@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Binding</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <script>
+        $("document").ready(function() {
+            $("#oneButton").bind("click", alertButtonCLicked);
+
+            $("#textBox1").bind("blur", blurEvent).bind("focus", focusEvent)
+                .bind("onmousedown", mouseDown).bind("onmouseup", mouseUp)
+                .bind("change", changeEvent);
+
+            $(window).resize(resizedWindow);
+
+            $("#twoButton").bind("dblclick", dblClickMe);
+
+            $("#logo").bind("mouseover", mouseOver).bind("mouseout", mouseOut);
+
+            $("form").submit(function() {
+                alert("send button is pressed");
+            });
+
+            $("#threeButton").bind("click", unbindEvent);
+
+            $("#theBody").bind("keyup", keyPressEvent).bind("mousemove", mouseMove).click(event, eventTriggered);
+
+        });
+
+        function keyPressEvent(event) {
+            $("#fifth").text(String.fromCharCode(event.keyCode));
+        }
+
+        function mouseMove(event) {
+            $("#seventh").html(event.screenX);
+            $("#ninth").html(event.screenY);
+        }
+
+        function eventTriggered() {
+
+            $("#tenth").text(event.target.nodeName);
+
+            $("#eleventh").html(event.timeStamp);
+        }
+
+
+        function unbindEvent() {
+            $("#logo").unbind("mouseover", mouseOver).unbind("mouseout", mouseOut);
+        }
+
+        function mouseOver() {
+            $("#second").html("you are over my logo");
+        }
+
+        function mouseOut() {
+            $("#second").html("you left the logo");
+        }
+
+        function dblClickMe() {
+            $("#second").html("it work on double click only");
+        }
+
+        function resizedWindow() {
+            $("#second").html("window is resized W =" + window.innerWidth + "H = " + window.innerHeight);
+        }
+
+
+
+        function changeEvent() {
+            $("#third").html("you changed into text box");
+        }
+
+        function mouseDown() {
+            $("#second").html("you left the box");
+        }
+
+        function mouseUp() {
+            $("#second").html("you leave the box");
+        }
+
+        function blurEvent() {
+            $("#second").html("you leave the box.");
+        }
+
+        function focusEvent() {
+            $("#second").html("you entered into box");
+        }
+
+
+
+        function alertButtonCLicked() {
+            alert("this is an alert message!!!");
+        }
+    </script>
+</head>
+
+<body id="theBody">
+
+    <div>
+        <h3>JQuery Event Handlers</h3>
+    </div>
+
+
+
+
+
+    <div>
+
+        <img src="http://www.newthinktank.com/favicon.png" id="logo" alt="Little Brain" />
+
+    </div>
+
+    <br />
+
+
+
+    <div>
+
+        <p><strong>Events Triggered on the Page:</strong></p>
+
+        <p id="second">Waiting for Event</p>
+
+        <p id="third">Waiting for Change</p>
+
+    </div>
+
+
+
+    <div>
+
+        <p><strong>Key Events Triggered on the Page:</strong></p>
+
+        <span id="fourth">Key Pressed:</span>
+
+        <span id="fifth">Waiting for Change</span>
+
+    </div><br />
+
+
+
+    <div>
+
+        <p><strong>Mouse Movements on the Page:</strong></p>
+
+        <span id="sixth">Mouse X Coordinate:</span>
+
+        <span id="seventh">Waiting for Change</span><br />
+
+        <span id="eighth">Mouse Y Coordinate:</span>
+
+        <span id="ninth">Waiting for Change</span><br />
+
+        <span>Textbox Changed: </span>
+
+        <span id="tenth">Waiting for Event</span><br />
+
+        <span>Element Changed When: </span>
+
+        <span id="eleventh">Event Occurred When</span>
+
+    </div><br />
+
+
+
+    <form action="">
+
+        <button type="button" id="oneButton">Alert on Click</button>
+
+        <button type="button" id="twoButton">Click on me Twice</button>
+
+        <button type="button" id="threeButton">Unbind the Logo</button>
+
+        <input type="text" id="textBox1" size=40>
+
+        <input type="submit" value="Send">
+
+    </form>
+
+
+
+</body>
+
+</html>
